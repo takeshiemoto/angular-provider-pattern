@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "projects": {
+    "counter-app": {
+      "projectType": "application",
+      "root": "apps/counter-app",
+      "sourceRoot": "apps/counter-app/src",
+      "prefix": "angular-provider-pattern",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/counter-app",
+            "index": "apps/counter-app/src/index.html",
+            "main": "apps/counter-app/src/main.ts",
+            "polyfills": "apps/counter-app/src/polyfills.ts",
+            "tsConfig": "apps/counter-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/counter-app/src/favicon.ico",
+              "apps/counter-app/src/assets"
+            ],
+            "styles": ["apps/counter-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/counter-app/src/environments/environment.ts",
+                  "with": "apps/counter-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "counter-app:build:production"
+            },
+            "development": {
+              "browserTarget": "counter-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "counter-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/counter-app/src/**/*.ts",
+              "apps/counter-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/counter-app"],
+          "options": {
+            "jestConfig": "apps/counter-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "counter-app-e2e": {
+      "root": "apps/counter-app-e2e",
+      "sourceRoot": "apps/counter-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/counter-app-e2e/cypress.json",
+            "tsConfig": "apps/counter-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "counter-app:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "counter-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/counter-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "yarn"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "counter-app"
+}
