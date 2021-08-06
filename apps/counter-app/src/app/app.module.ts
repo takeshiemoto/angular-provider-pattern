@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { CounterViewComponent } from './counter-view.component';
 import { IncrementButtonComponent } from './increment-button.component';
 import { DecrementButtonComponent } from './decrement-button.component';
-import { HeaderComponent } from './header.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +12,6 @@ import { HeaderComponent } from './header.component';
     CounterViewComponent,
     IncrementButtonComponent,
     DecrementButtonComponent,
-    HeaderComponent,
   ],
   imports: [BrowserModule],
   providers: [],
