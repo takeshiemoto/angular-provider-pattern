@@ -5,7 +5,7 @@
       "projectType": "application",
       "root": "apps/counter-app",
       "sourceRoot": "apps/counter-app/src",
-      "prefix": "angular-provider-pattern",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -90,32 +90,6 @@
           "options": {
             "jestConfig": "apps/counter-app/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "counter-app-e2e": {
-      "root": "apps/counter-app-e2e",
-      "sourceRoot": "apps/counter-app-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/counter-app-e2e/cypress.json",
-            "tsConfig": "apps/counter-app-e2e/tsconfig.e2e.json",
-            "devServerTarget": "counter-app:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "counter-app:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/counter-app-e2e/**/*.{js,ts}"]
           }
         }
       }

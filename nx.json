@@ -29,10 +29,6 @@
   "projects": {
     "counter-app": {
       "tags": []
-    },
-    "counter-app-e2e": {
-      "tags": [],
-      "implicitDependencies": ["counter-app"]
     }
   }
 }
